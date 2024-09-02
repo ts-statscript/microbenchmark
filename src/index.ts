@@ -18,6 +18,8 @@ interface BenchmarkResult {
     max: number;
     /** Standard deviation of execution times */
     sd: number;
+    /** Time unit */
+    unit: string;
 }
 
 /**
@@ -96,7 +98,8 @@ async function microbenchmark(
             mean: mean * conversionFactor,
             min: min * conversionFactor,
             max: max * conversionFactor,
-            sd: sd * conversionFactor
+            sd: sd * conversionFactor,
+            unit: unit
         });
     }
 
