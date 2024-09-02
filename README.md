@@ -32,33 +32,33 @@ Here's a basic example of how to use `@ts-statscript/microbenchmark`:
 import { microbenchmark, BenchmarkEntry } from '@ts-statscript/microbenchmark';
 
 const benchmarks: BenchmarkEntry[] = [
-  {
-    name: 'for loop',
-    fn: () => {
-      let sum = 0;
-      for (let i = 0; i < 1000; i++) {
-        sum += i;
-      }
-      return sum;
+    {
+        name: 'for loop',
+        fn: () => {
+            let sum = 0;
+            for (let i = 0; i < 1000; i++) {
+                sum += i;
+            }
+            return sum;
+        }
+    },
+    {
+        name: 'reduce',
+        fn: () => {
+            return Array.from({ length: 1000 }, (_, i) => i).reduce((sum, i) => sum + i, 0);
+        }
     }
-  },
-  {
-    name: 'reduce',
-    fn: () => {
-      return Array.from({ length: 1000 }, (_, i) => i).reduce((sum, i) => sum + i, 0);
-    }
-  }
 ];
 
-async function runBenchmark() {
-  const results = await microbenchmark(benchmarks, { times: 1000, warmup: 100, unit: 'us' });
-  console.log(results);
+async function benchmark() {
+    const results = await microbenchmark(benchmarks, { times: 1000, warmup: 100, unit: 'us' });
+    console.log(results);
 }
 
-runBenchmark();
+benchmark();
 ```
 
-## API
+## Usage
 
 ### `microbenchmark(entries, options)`
 
@@ -67,12 +67,12 @@ Runs the benchmark suite and returns the results.
 #### Parameters:
 
 - `entries`: An array of `BenchmarkEntry` objects, each containing:
-  - `name`: A string identifying the benchmark
-  - `fn`: The function to benchmark (can be synchronous or asynchronous)
+    - `name`: A string identifying the benchmark
+    - `fn`: The function to benchmark (can be synchronous or asynchronous)
 - `options`: (Optional) A `BenchmarkOptions` object with the following properties:
-  - `times`: Number of times to run each benchmark (default: 100)
-  - `warmup`: Number of warmup runs before timing (default: 10)
-  - `unit`: Time unit for results ('ns', 'us', 'ms', or 's', default: 'ms')
+    - `times`: Number of times to run each benchmark (default: 100)
+    - `warmup`: Number of warmup runs before timing (default: 10)
+    - `unit`: Time unit for results ('ns', 'us', 'ms', or 's', default: 'ms')
 
 #### Returns:
 
@@ -96,51 +96,51 @@ import { microbenchmark, BenchmarkEntry } from '@ts-statscript/microbenchmark';
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 const benchmarks: BenchmarkEntry[] = [
-  {
-    name: 'Synchronous: for loop',
-    fn: () => {
-      let sum = 0;
-      for (let i = 0; i < 1000; i++) {
-        sum += i;
-      }
-      return sum;
+    {
+        name: 'Synchronous: for loop',
+        fn: () => {
+            let sum = 0;
+            for (let i = 0; i < 1000; i++) {
+                sum += i;
+            }
+            return sum;
+        }
+    },
+    {
+        name: 'Synchronous: reduce',
+        fn: () => {
+            return Array.from({ length: 1000 }, (_, i) => i).reduce((sum, i) => sum + i, 0);
+        }
+    },
+    {
+        name: 'Asynchronous: 1ms delay',
+        fn: async () => {
+            await delay(1);
+        }
+    },
+    {
+        name: 'Asynchronous: 2ms delay',
+        fn: async () => {
+            await delay(2);
+        }
     }
-  },
-  {
-    name: 'Synchronous: reduce',
-    fn: () => {
-      return Array.from({ length: 1000 }, (_, i) => i).reduce((sum, i) => sum + i, 0);
-    }
-  },
-  {
-    name: 'Asynchronous: 1ms delay',
-    fn: async () => {
-      await delay(1);
-    }
-  },
-  {
-    name: 'Asynchronous: 2ms delay',
-    fn: async () => {
-      await delay(2);
-    }
-  }
 ];
 
-async function runDemo() {
-  console.log('Running benchmarks...');
-  const results = await microbenchmark(benchmarks, { times: 1000, warmup: 100, unit: 'us' });
-  
-  results.forEach(result => {
-    console.log(`\n${result.name}:`);
-    console.log(`  Median: ${result.median.toFixed(2)} μs`);
-    console.log(`  Mean: ${result.mean.toFixed(2)} μs`);
-    console.log(`  Min: ${result.min.toFixed(2)} μs`);
-    console.log(`  Max: ${result.max.toFixed(2)} μs`);
-    console.log(`  Standard Deviation: ${result.sd.toFixed(2)} μs`);
-  });
+async function benchmark() {
+    console.log('Running benchmarks...');
+    const results = await microbenchmark(benchmarks, { times: 1000, warmup: 100, unit: 'us' });
+    
+    results.forEach(result => {
+        console.log(`\n${result.name}:`);
+        console.log(`  Median: ${result.median.toFixed(2)} μs`);
+        console.log(`  Mean: ${result.mean.toFixed(2)} μs`);
+        console.log(`  Min: ${result.min.toFixed(2)} μs`);
+        console.log(`  Max: ${result.max.toFixed(2)} μs`);
+        console.log(`  Standard Deviation: ${result.sd.toFixed(2)} μs`);
+    });
 }
 
-runDemo();
+benchmark();
 ```
 
 This demo will output the benchmark results for four different functions: two synchronous and two asynchronous. The results will show you how `@ts-statscript/microbenchmark` can be used to compare the performance of different implementations and types of functions.
