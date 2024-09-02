@@ -1,4 +1,4 @@
-# microbenchmark
+# @ts-statscript/microbenchmark
 
 A TypeScript microbenchmarking library inspired by R's microbenchmark package. This library allows you to easily benchmark and compare the performance of multiple functions, supporting both synchronous and asynchronous operations.
 
@@ -6,7 +6,7 @@ A TypeScript microbenchmarking library inspired by R's microbenchmark package. T
 
 - Benchmark multiple functions in a single call
 - Support for both synchronous and asynchronous functions
-- Customizable number of iterations and warmup rounds
+- Customisable number of iterations and warmup rounds
 - Flexible time unit reporting (nanoseconds, microseconds, milliseconds, seconds)
 - Comprehensive statistics including median, mean, min, max, and standard deviation
 
@@ -149,6 +149,6 @@ This demo will output the benchmark results for four different functions: two sy
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
+## Licence
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT Licence.
