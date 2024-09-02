@@ -29,7 +29,11 @@ yarn add @ts-statscript/microbenchmark
 Here's a basic example of how to use `@ts-statscript/microbenchmark`:
 
 ```typescript
-import { microbenchmark, BenchmarkEntry } from '@ts-statscript/microbenchmark';
+import {
+    microbenchmark,
+    BenchmarkEntry,
+    benchmarkToMarkdown
+} from '@ts-statscript/microbenchmark';
 
 const benchmarks: BenchmarkEntry[] = [
     {
@@ -50,12 +54,26 @@ const benchmarks: BenchmarkEntry[] = [
     }
 ];
 
-async function benchmark() {
-    const results = await microbenchmark(benchmarks, { times: 1000, warmup: 100, unit: 'us' });
+async function main(): Promise<void> {
+    const results = await microbenchmark(benchmarks, { times: 5, warmup: 100, unit: 'us' });
     console.log(results);
+
+    benchmarkToMarkdown(results);
 }
 
-benchmark();
+main();
+```
+
+Outputs to markdown file:
+
+```markdown
+# Benchmark Results
+
+| Function | Median | Mean | Min | Max | SD | Unit|
+|----------|--------|------|-----|-----|--------------------|------|
+| for loop | 6.750000000000256 | 6.549800000000516 | 4.8330000000014195 | 7.999999999999119 | 1.0367272351002275 | us |
+| reduce | 11.416000000000537 | 23.38280000000026 | 9.665999999999286 | 71.79100000000105 | 24.22385929120337 | us |
+
 ```
 
 ## Usage
