@@ -1,26 +1,54 @@
 import { performance } from 'perf_hooks';
 
+/**
+ * Represents the result of a single benchmark run.
+ */
 interface BenchmarkResult {
+    /** The name of the benchmarked function */
     name: string;
+    /** Array of execution times for each run */
     times: number[];
+    /** Median execution time */
     median: number;
+    /** Mean execution time */
     mean: number;
+    /** Minimum execution time */
     min: number;
+    /** Maximum execution time */
     max: number;
+    /** Standard deviation of execution times */
     sd: number;
 }
 
+/**
+ * Options for configuring the benchmark run.
+ */
 interface BenchmarkOptions {
+    /** Number of times to run each benchmark (default: 100) */
     times?: number;
+    /** Number of warmup runs before timing (default: 10) */
     warmup?: number;
+    /** Time unit for results (default: 'ms') */
     unit?: 'ns' | 'us' | 'ms' | 's';
 }
 
+/**
+ * Represents a single entry in the benchmark suite.
+ */
 interface BenchmarkEntry {
+    /** Name of the benchmark */
     name: string;
+    /** Function to be benchmarked */
     fn: () => any | Promise<any>;
 }
 
+/**
+ * Runs microbenchmarks on the provided functions and returns performance statistics.
+ *
+ * @param entries - An array of benchmark entries to run
+ * @param options - Configuration options for the benchmark
+ * @returns A promise that resolves to an array of benchmark results
+ */
 async function microbenchmark(
     entries: BenchmarkEntry[],
     options: BenchmarkOptions = {}
@@ -75,6 +103,12 @@ async function microbenchmark(
     return results;
 }
 
+/**
+ * Calculates the conversion factor for the given time unit.
+ *
+ * @param unit - The time unit to convert to
+ * @returns The conversion factor
+ */
 function getConversionFactor(unit: 'ns' | 'us' | 'ms' | 's'): number {
     switch (unit) {
         case 'ns':
