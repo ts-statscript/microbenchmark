@@ -1,19 +1,16 @@
-import fs from 'fs';
-import path from 'path';
-
 import { BenchmarkResult } from './microbenchmark';
 
 /**
- * Writes benchmark results to a Markdown file.
+ * Formats the results benchmark results object to markdown table
  *
  * @param results - Array of BenchmarkResult objects
- * @param outputPath - Path to write the Markdown file (default: './docs/benchmark-results.md')
+ * @param mdTitle - A markdown title for the table e.g. '# Variance benchmarks'
  */
 export function benchmarkToMarkdown(
     results: BenchmarkResult[],
-    outputPath: string = path.join(process.cwd(), 'benchmark-results.md')
-): void {
-    let markdown = '# Benchmark Results\n\n';
+    mdTitle?: string
+): string {
+    let markdown = mdTitle ? `${mdTitle}\n\n` : '';
     markdown += '| Function | Median | Mean | Min | Max | SD | Unit|\n';
     markdown +=
         '|----------|--------|------|-----|-----|--------------------|------|\n';
@@ -22,6 +19,5 @@ export function benchmarkToMarkdown(
         markdown += `| ${result.name} | ${result.median} | ${result.mean} | ${result.min} | ${result.max} | ${result.sd} | ${result.unit} |\n`;
     });
 
-    fs.writeFileSync(outputPath, markdown);
-    console.log(`Benchmark results written to ${outputPath}`);
+    return markdown;
 }
