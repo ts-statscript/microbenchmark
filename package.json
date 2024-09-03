@@ -20,13 +20,13 @@
   },
   "license": "MIT",
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "npm run clean && tsc",
+    "clean": "rm -rf dist docs",
+    "build": "yarn run clean && tsc",
+    "test": "jest",
+    "format": "prettier --write .",
     "prepublish": "npm run build",
     "prepublishOnly": "npm run build",
-    "publishAlpha": "npm version prerelease --preid=dev --no-git-tag-version && npm build && npm publish --tag dev --non-interactive",
-    "format": "prettier --write .",
-    "test": "jest"
+    "docs": "yarn run benchmarks && typedoc"
   },
   "prettier": {
     "semi": true,
@@ -53,6 +53,7 @@
     "prettier": "^3.3.3",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
+    "typedoc": "^0.26.6",
     "typescript": "^5.4.2"
   }
 }
