@@ -20,6 +20,7 @@
     "format": "prettier --write .",
     "test": "jest"
   },
+  "files": ["dist/**/*"],
   "prettier": {
     "semi": true,
     "trailingComma": "none",
