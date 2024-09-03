@@ -21,6 +21,9 @@ jobs:
       - name: Run tests
         run: yarn test
 
+      - name: Build
+        run: yarn build
+
       - name: Get current version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
