@@ -1,6 +1,9 @@
 {
   "name": "@ts-statscript/microbenchmark",
   "version": "0.0.2",
+  "engines": {
+    "node": ">=18"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
