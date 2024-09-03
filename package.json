@@ -26,7 +26,7 @@
     "format": "prettier --write .",
     "prepublish": "npm run build",
     "prepublishOnly": "npm run build",
-    "docs": "yarn run benchmarks && typedoc"
+    "docs": "typedoc"
   },
   "prettier": {
     "semi": true,
