@@ -2,7 +2,6 @@
   "name": "@ts-statscript/microbenchmark",
   "version": "0.0.2",
   "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/ts-statscript/microbenchmark.git"
@@ -15,6 +14,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "yarn run clean && tsc",
+    "prepublish": "npm run build",
     "prepublishOnly": "yarn run build",
     "publishAlpha": "npm version prerelease --preid=dev --no-git-tag-version && yarn build && yarn publish --tag dev --non-interactive",
     "format": "prettier --write .",
