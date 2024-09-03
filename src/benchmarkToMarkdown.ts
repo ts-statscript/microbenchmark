@@ -1,17 +1,13 @@
 import { BenchmarkResult } from './microbenchmark';
 
 /**
- * Formats the results benchmark results object to markdown table
+ * Formats results as a markdown table
  *
  * @param results - Array of BenchmarkResult objects
  * @param mdTitle - A markdown title for the table e.g. '# Variance benchmarks'
  */
-export function benchmarkToMarkdown(
-    results: BenchmarkResult[],
-    mdTitle?: string
-): string {
-    let markdown = mdTitle ? `${mdTitle}\n\n` : '';
-    markdown += '| Function | Median | Mean | Min | Max | SD | Unit|\n';
+export function benchmarkToMarkdown(results: BenchmarkResult[]): string {
+    let markdown = '| Function | Median | Mean | Min | Max | SD | Unit|\n';
     markdown +=
         '|----------|--------|------|-----|-----|--------------------|------|\n';
 
