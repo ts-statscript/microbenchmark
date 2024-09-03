@@ -2,6 +2,11 @@
   "name": "@ts-statscript/microbenchmark",
   "version": "0.0.2",
   "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "src/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/ts-statscript/microbenchmark.git"
@@ -20,7 +25,6 @@
     "format": "prettier --write .",
     "test": "jest"
   },
-  "files": ["dist/**/*"],
   "prettier": {
     "semi": true,
     "trailingComma": "none",
